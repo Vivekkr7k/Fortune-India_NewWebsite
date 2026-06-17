@@ -281,6 +281,18 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
               {product.description}
             </p>
 
+            {/* Shipping & Packaging Box */}
+            <div className="bg-white border border-[var(--color-border)] rounded-xl p-4 mb-6 shadow-sm">
+              <h4 className="text-[13px] font-bold text-[var(--color-ink)] uppercase tracking-wider mb-2 flex items-center gap-2">
+                <Truck size={16} className="text-[var(--color-signal)]" />
+                Shipping & Packaging
+              </h4>
+              <div className="flex flex-col gap-1 text-[13px] text-[var(--color-body)] font-[var(--font-body)]">
+                <p>Shipping: <strong>₹550</strong></p>
+                <p className="text-[12px] text-[var(--color-muted)]">₹550 base + 10% per additional item</p>
+              </div>
+            </div>
+
             {/* Specifications Box */}
             {Object.keys(specsObj).length > 0 && (
               <div className="bg-white border border-[var(--color-border)] rounded-xl p-4 mb-6 shadow-sm">
@@ -342,6 +354,23 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                     * MOQ: {specsObj['Min Order']}
                   </span>
                 )}
+              </div>
+            </div>
+
+            {/* Final Price Calculator */}
+            <div className="flex flex-col gap-1.5 mb-6 bg-[var(--color-canvas)] p-4 rounded-xl border border-[var(--color-border-light)] shadow-inner">
+              <div className="flex justify-between text-[13px] text-[var(--color-body)]">
+                <span>Items ({qty} &times; {formatPrice(product.price)})</span>
+                <span>{formatPrice(product.price * qty)}</span>
+              </div>
+              <div className="flex justify-between text-[13px] text-[var(--color-body)]">
+                <span>Shipping Cost</span>
+                <span>{formatPrice(550 + (qty - 1) * 55)}</span>
+              </div>
+              <div className="w-full h-px bg-[var(--color-border)] my-1.5"></div>
+              <div className="flex justify-between font-[var(--font-display)] font-extrabold text-[16px] text-[var(--color-ink)]">
+                <span>Total Amount</span>
+                <span>{formatPrice((product.price * qty) + (550 + (qty - 1) * 55))}</span>
               </div>
             </div>
 

@@ -1,9 +1,19 @@
 import BlogPageClient from '@/components/blog/BlogPageClient'
+import type { Metadata } from 'next'
+import { buildMetadata } from '@/lib/site'
 
-export const metadata = {
-  title: 'Blog & Insights — Fortune India Precision Printing',
-  description: 'Read industrial printing insights, compliance guides (HAL, BHEL, TATA), barcode and labelling guidelines, and the latest news from Fortune India Bangalore.',
-}
+export const metadata: Metadata = buildMetadata({
+  title: 'Blog & Insights',
+  description:
+    'Industrial printing insights, compliance guides (HAL, BHEL, TATA), barcode and labelling guidelines, and the latest news from Fortune India, Bangalore.',
+  path: '/blog',
+  keywords: [
+    'industrial printing blog',
+    'nameplate guide',
+    'aerospace label standards india',
+    'barcode vs qr labels',
+  ],
+})
 
 const posts = [
   {

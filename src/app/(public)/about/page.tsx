@@ -1,10 +1,20 @@
 import Link from 'next/link'
 import { ShieldAlert, Award, Plane, Truck, Landmark, BarChart } from 'lucide-react'
+import type { Metadata } from 'next'
+import { buildMetadata } from '@/lib/site'
 
-export const metadata = {
-  title: 'About Us — Fortune India Precision Printing',
-  description: 'Learn about Fortune India, Bangalore Attibele supplier of high-quality precision printing nameplates and safety labels, authorized vendor to HAL, BHEL, and TATA.',
-}
+export const metadata: Metadata = buildMetadata({
+  title: 'About Us',
+  description:
+    'Learn about Fortune India — a Bangalore (Attibele) precision printing company since 2009 and authorized supplier of nameplates and safety labels to HAL, BHEL and TATA, serving aerospace, defence, automotive and pharma.',
+  path: '/about',
+  keywords: [
+    'about fortune india',
+    'precision printing company bangalore',
+    'authorized HAL BHEL TATA supplier',
+    'industrial nameplate manufacturer india',
+  ],
+})
 
 export default function AboutPage() {
   const stats = [

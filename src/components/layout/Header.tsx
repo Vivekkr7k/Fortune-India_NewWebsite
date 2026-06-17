@@ -16,7 +16,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 w-full bg-white/95 backdrop-blur-md border-b border-[var(--border)] z-40">
-      <div className="max-w-[var(--container)] mx-auto px-4 md:px-8 h-24 md:h-[110px] flex items-center justify-between">
+      <div className="max-w-[var(--container)] mx-auto px-4 md:px-8 h-16 md:h-[80px] flex items-center justify-between">
         
         {/* LOGO */}
         <Link href="/" className="flex items-center group">
@@ -25,7 +25,7 @@ export function Header() {
             alt="Fortune India Logo"
             width={400}
             height={120}
-            className="h-20 md:h-[90px] w-auto object-contain transition-transform group-hover:scale-105"
+            className="h-12 md:h-16 w-auto object-contain scale-[1.4] origin-left transition-transform group-hover:scale-[1.45]"
             priority
           />
         </Link>
@@ -40,6 +40,9 @@ export function Header() {
           </Link>
           <Link href="/about" className="text-[var(--ink)] hover:text-[var(--signal)] transition-colors">
             About Us
+          </Link>
+          <Link href="/faq" className="text-[var(--ink)] hover:text-[var(--signal)] transition-colors">
+            FAQ
           </Link>
           <Link href="/contact" className="text-[var(--ink)] hover:text-[var(--signal)] transition-colors">
             Contact
@@ -98,15 +101,22 @@ export function Header() {
           >
             Products
           </Link>
-          <Link 
-            href="/about" 
+          <Link
+            href="/about"
             onClick={() => setMobileMenuOpen(false)}
             className="text-[var(--ink)] hover:text-[var(--signal)] transition-colors py-1.5"
           >
             About Us
           </Link>
-          <Link 
-            href="/contact" 
+          <Link
+            href="/faq"
+            onClick={() => setMobileMenuOpen(false)}
+            className="text-[var(--ink)] hover:text-[var(--signal)] transition-colors py-1.5"
+          >
+            FAQ
+          </Link>
+          <Link
+            href="/contact"
             onClick={() => setMobileMenuOpen(false)}
             className="text-[var(--ink)] hover:text-[var(--signal)] transition-colors py-1.5"
           >

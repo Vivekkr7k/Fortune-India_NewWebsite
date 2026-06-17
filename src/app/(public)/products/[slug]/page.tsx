@@ -4,6 +4,8 @@ import { toClientProduct, type RawProduct } from '@/lib/serialize'
 import { notFound } from 'next/navigation'
 import { ProductDetailClient } from '@/components/products/ProductDetailClient'
 import type { Metadata } from 'next'
+import { buildMetadata, breadcrumbJsonLd, SITE } from '@/lib/site'
+import { getProductImageUrl } from '@/lib/imageUrl'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -23,12 +25,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   await connectDB()
 
   const product = await Product.findOne(slugFilter(slug)).lean<RawProduct>()
-  if (!product) return {}
-
-  return {
-    title: `${product.name} — Fortune India`,
-    description: (product.description ?? '').slice(0, 160),
+  if (!product) {
+    return buildMetadata({ title: 'Product Not Found', path: `/products/${slug}`, noindex: true })
   }
+
+  const code = product.code || slug
+  const name = product.name ?? 'Product'
+  const description =
+    (product.description ?? '').slice(0, 160) ||
+    `${name} — precision printing from Fortune India, authorized supplier to HAL, BHEL & TATA.`
+  const image = product.image ? getProductImageUrl(product.image) : undefined
+
+  return buildMetadata({
+    title: name,
+    description,
+    path: `/products/${code}`,
+    image: image?.startsWith('http') ? image : undefined,
+    keywords: [name, `${name} supplier`, `buy ${name} india`, product.brand || 'Fortune India'],
+  })
 }
 
 export const revalidate = 0
@@ -59,7 +73,8 @@ export default async function ProductDetailPage({ params }: PageProps) {
   const relatedProducts = relatedDocs.map(toClientProduct)
 
   // Generate JSON-LD Structured Data
-  const jsonLd = {
+  const productUrl = `${SITE.url}/products/${product.slug}`
+  const productJsonLd = {
     "@context": "https://schema.org/",
     "@type": "Product",
     "name": product.name,
@@ -67,20 +82,28 @@ export default async function ProductDetailPage({ params }: PageProps) {
     "sku": product.code,
     "image": JSON.parse(product.images)[0] || '',
     "brand": { "@type": "Brand", "name": product.brand },
+    "category": product.category?.name,
     "offers": {
       "@type": "Offer",
       "price": product.price,
       "priceCurrency": "INR",
       "availability": product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-      "url": `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/products/${product.slug}`
+      "url": productUrl,
+      "seller": { "@id": `${SITE.url}/#organization` }
     }
   }
+
+  const breadcrumb = breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Products', path: '/products' },
+    { name: product.name, path: `/products/${product.slug}` },
+  ])
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([productJsonLd, breadcrumb]) }}
       />
       <ProductDetailClient
         product={product}

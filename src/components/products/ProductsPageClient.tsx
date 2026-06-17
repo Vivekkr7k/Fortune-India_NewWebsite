@@ -127,21 +127,6 @@ export function ProductsPageClient({ products, categories }: ProductsPageClientP
 
   return (
     <div className="flex flex-col min-h-screen bg-[var(--color-canvas)]">
-      {/* Page Header */}
-      <div className="bg-[var(--color-canvas)] pt-14 pb-8 border-b border-[var(--color-border-light)]">
-        <div className="max-w-[var(--container)] mx-auto px-4 md:px-8 flex flex-col gap-2">
-          <span className="font-[var(--font-mono)] text-[10px] font-bold text-[var(--color-signal)] tracking-widest uppercase">
-            / PRODUCT CATALOGUE
-          </span>
-          <h1 className="font-[var(--font-display)] text-[32px] md:text-[40px] font-extrabold text-[var(--color-ink)] leading-none tracking-tight">
-            Precision Printing Products.
-          </h1>
-          <p className="font-[var(--font-body)] text-[14px] md:text-[15px] text-[var(--color-muted)] max-w-2xl mt-1">
-            Browse our full range of industrial-grade printing solutions for Aerospace, Defence, Automotive &amp; Pharma.
-          </p>
-        </div>
-      </div>
-
       {/* Sticky Filter Bar */}
       <FilterBar
         categories={categories}
