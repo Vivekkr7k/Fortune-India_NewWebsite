@@ -74,7 +74,7 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
               <span className="font-[var(--font-mono)] text-[10px] text-[var(--color-muted)] uppercase tracking-wider">Payment Method</span>
               <span className="font-semibold text-[var(--color-ink)] flex items-center gap-1 uppercase">
                 <CreditCard size={13} className="text-[var(--color-signal)]" />
-                {order.paymentMethod === 'RAZORPAY' ? 'Paid Online' : order.paymentMethod === 'COD' ? 'Cash on Delivery' : 'NEFT / Bank Transfer'}
+                {order.paymentMethod === 'RAZORPAY' ? 'Paid Online' : order.paymentMethod === 'COD' ? 'Cash on Delivery' : order.paymentMethod === 'UPI_QR' ? 'UPI QR Code' : 'NEFT / Bank Transfer'}
               </span>
             </div>
             <div className="flex flex-col gap-0.5">
@@ -83,6 +83,12 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
                 {order.status}
               </span>
             </div>
+            {order.paymentMethod === 'UPI_QR' && order.upiTransactionId && (
+              <div className="flex flex-col gap-0.5 col-span-2 border-t border-[var(--color-border-light)] pt-3.5 mt-1">
+                <span className="font-[var(--font-mono)] text-[10px] text-[var(--color-muted)] uppercase tracking-wider">UPI Transaction ID / UTR</span>
+                <span className="font-[var(--font-mono)] text-[13px] font-bold text-[var(--color-ink)]">{order.upiTransactionId}</span>
+              </div>
+            )}
           </div>
 
           {/* Items list */}

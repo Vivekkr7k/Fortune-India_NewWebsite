@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
     const { items, customer, paymentMethod } = body as {
       items: IncomingItem[]
       customer: Record<string, string | undefined>
-      paymentMethod: 'RAZORPAY' | 'COD' | 'BANK_TRANSFER'
+      paymentMethod: 'RAZORPAY' | 'COD' | 'BANK_TRANSFER' | 'UPI_QR'
     }
 
     // Validate required fields up front
@@ -93,6 +93,11 @@ export async function POST(req: NextRequest) {
         { error: 'Online payment is not configured. Set valid RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in .env.local, or use Cash on Delivery.' },
         { status: 503 }
       )
+    }
+
+    // UPI QR requires transaction ID verification
+    if (paymentMethod === 'UPI_QR' && !(body as any).upiTransactionId) {
+      return NextResponse.json({ error: 'UPI Transaction ID / UTR Number is required for QR payments.' }, { status: 400 })
     }
 
     const subtotal = round2(items.reduce((s, i) => s + i.price * i.quantity, 0))
@@ -131,6 +136,7 @@ export async function POST(req: NextRequest) {
       gst,
       total,
       paymentMethod,
+      upiTransactionId: paymentMethod === 'UPI_QR' ? (body as any).upiTransactionId : undefined,
       paymentStatus: 'PENDING',
       status: paymentMethod === 'RAZORPAY' ? 'PENDING' : 'CONFIRMED',
     })

@@ -29,9 +29,10 @@ export interface IOrder extends Document {
   shipping: number
   gst: number
   total: number
-  paymentMethod: 'RAZORPAY' | 'COD' | 'BANK_TRANSFER'
+  paymentMethod: 'RAZORPAY' | 'COD' | 'BANK_TRANSFER' | 'UPI_QR'
   razorpayOrderId?: string
   razorpayPaymentId?: string
+  upiTransactionId?: string
   paymentStatus: 'PENDING' | 'PAID' | 'FAILED'
   status: 'PENDING' | 'CONFIRMED' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED'
   notes?: string
@@ -67,9 +68,10 @@ const OrderSchema = new Schema<IOrder>({
   shipping:          { type: Number, default: 0 },
   gst:               { type: Number, default: 0 },
   total:             { type: Number, required: true },
-  paymentMethod:     { type: String, enum: ['RAZORPAY', 'COD', 'BANK_TRANSFER'], default: 'COD' },
+  paymentMethod:     { type: String, enum: ['RAZORPAY', 'COD', 'BANK_TRANSFER', 'UPI_QR'], default: 'COD' },
   razorpayOrderId:   { type: String },
   razorpayPaymentId: { type: String },
+  upiTransactionId:  { type: String },
   paymentStatus:     { type: String, enum: ['PENDING', 'PAID', 'FAILED'], default: 'PENDING' },
   status:            { type: String, enum: ['PENDING', 'CONFIRMED', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED'], default: 'PENDING' },
   notes:             { type: String },
