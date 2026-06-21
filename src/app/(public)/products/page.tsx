@@ -43,8 +43,19 @@ export default async function ProductsPage({ searchParams }: PageProps) {
   ])
 
   const products = productDocs.map(toClientProduct)
-  const categories = categoryDocs.map(toClientCategory)
-  const subcategories = subcategoryDocs.map(toClientSubcategory).filter(Boolean) as ClientSubcategory[]
+
+  // Determine which categories and subcategories actually have products
+  const activeCategoryIds = new Set(products.map(p => p.category?.id).filter(Boolean))
+  const activeSubcategoryIds = new Set(products.map(p => p.subcategory?.id).filter(Boolean))
+
+  const categories = categoryDocs
+    .map(toClientCategory)
+    .filter(c => activeCategoryIds.has(c.id))
+
+  const subcategories = subcategoryDocs
+    .map(toClientSubcategory)
+    .filter(Boolean)
+    .filter(s => s && activeSubcategoryIds.has(s.id)) as ClientSubcategory[]
 
   return (
     <ProductsPageClient

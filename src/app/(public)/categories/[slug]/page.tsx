@@ -38,9 +38,19 @@ export default async function CategoryDetailPage({ params }: PageProps) {
     notFound()
   }
 
-  const subcategoryDocs = await Subcategory.find({ category: categoryDoc._id })
+  const subcategories = await Subcategory.find({ category: categoryDoc._id })
     .sort({ name: 1 })
     .lean()
+
+  // Only show subcategories that have at least one active product
+  const subcategoryIds = subcategories.map(s => s._id)
+  const activeProducts = await Product.find(
+    { subcategory: { $in: subcategoryIds }, active: { $ne: false } },
+    'subcategory'
+  ).lean()
+
+  const activeSubcategoryIds = new Set(activeProducts.map(p => String(p.subcategory)))
+  const subcategoryDocs = subcategories.filter(s => activeSubcategoryIds.has(String(s._id)))
 
   const categoryName = toTitleCase(categoryDoc.name)
   const categorySlug = categoryDoc.slug || slugify(categoryDoc.name)
