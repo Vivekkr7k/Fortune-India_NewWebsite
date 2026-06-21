@@ -38,6 +38,7 @@ export function BentoHero() {
             src="/images/vision-to-reality.png" 
             alt="Transforming Your Vision into Reality" 
             fill 
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
             priority
           />
@@ -100,6 +101,7 @@ export function BentoHero() {
               src="/images/carbon_fiber.png" 
               alt="Carbon Fiber Structurals" 
               fill 
+              sizes="(max-width: 768px) 100vw, 25vw"
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-colors z-0"></div>
@@ -126,6 +128,7 @@ export function BentoHero() {
             src="/images/drone_parts.png" 
             alt="Drone & RC Parts" 
             fill 
+            sizes="(max-width: 768px) 100vw, 25vw"
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#141414]/90 to-[#141414]/70 transition-opacity z-0"></div>

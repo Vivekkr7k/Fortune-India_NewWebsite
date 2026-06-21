@@ -263,7 +263,7 @@ function EditProductModal({
             <label className="font-semibold text-[var(--color-body)]">Product Image</label>
             {previewUrl ? (
               <div className="relative w-full h-40 bg-[var(--color-canvas)] border border-[var(--color-border)] rounded-xl overflow-hidden flex items-center justify-center group p-1">
-                <Image src={previewUrl} alt="Product preview" fill className="object-contain" />
+                <Image src={previewUrl} alt="Product preview" fill sizes="(max-width: 768px) 100vw, 500px" className="object-contain" />
                 <button type="button" onClick={() => { setUploadedFilename(''); setPreviewUrl(''); }} className="absolute right-3 top-3 w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center text-white transition-all cursor-pointer opacity-0 group-hover:opacity-100">
                   <X size={15} />
                 </button>
@@ -569,6 +569,7 @@ export function ProductsPageClient({
                               src={imageSrc}
                               alt={product.name}
                               fill
+                              sizes="48px"
                               className="object-cover"
                             />
                           ) : (
@@ -895,6 +896,7 @@ export function ProductsPageClient({
                       src={previewUrl}
                       alt="Uploaded image preview"
                       fill
+                      sizes="(max-width: 768px) 100vw, 500px"
                       className="object-contain"
                     />
                     <button

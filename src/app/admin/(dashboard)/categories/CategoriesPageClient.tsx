@@ -152,7 +152,7 @@ function EditCategoryModal({
             <label className="font-semibold text-[var(--color-body)]">Category Image</label>
             {previewUrl ? (
               <div className="relative w-full h-24 bg-[var(--color-canvas)] border border-[var(--color-border)] rounded-xl overflow-hidden flex items-center justify-center p-1">
-                <Image src={previewUrl} alt="Category preview" fill className="object-contain" />
+                <Image src={previewUrl} alt="Category preview" fill sizes="(max-width: 768px) 100vw, 440px" className="object-contain" />
                 <button type="button" onClick={() => { setImage(''); setPreviewUrl(''); }} className="absolute right-2 top-2 w-6 h-6 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center text-white cursor-pointer">
                   <X size={12} />
                 </button>
@@ -255,7 +255,7 @@ function EditSubcategoryModal({
             <label className="font-semibold text-[var(--color-body)]">Subcategory Image</label>
             {previewUrl ? (
               <div className="relative w-full h-24 bg-[var(--color-canvas)] border border-[var(--color-border)] rounded-xl overflow-hidden flex items-center justify-center p-1">
-                <Image src={previewUrl} alt="Subcategory preview" fill className="object-contain" />
+                <Image src={previewUrl} alt="Subcategory preview" fill sizes="(max-width: 768px) 100vw, 440px" className="object-contain" />
                 <button type="button" onClick={() => { setImage(''); setPreviewUrl(''); }} className="absolute right-2 top-2 w-6 h-6 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center text-white cursor-pointer">
                   <X size={12} />
                 </button>
@@ -569,6 +569,7 @@ export function CategoriesPageClient({ initialCategories }: { initialCategories:
                             src={catImg}
                             alt={cat.name}
                             fill
+                            sizes="48px"
                             className="object-cover"
                           />
                         ) : (
@@ -624,6 +625,7 @@ export function CategoriesPageClient({ initialCategories }: { initialCategories:
                                     src={subImg}
                                     alt={sub.name}
                                     fill
+                                    sizes="32px"
                                     className="object-cover"
                                   />
                                 ) : (
@@ -712,6 +714,7 @@ export function CategoriesPageClient({ initialCategories }: { initialCategories:
                     src={catPreviewUrl}
                     alt="Category preview"
                     fill
+                    sizes="(max-width: 768px) 100vw, 440px"
                     className="object-contain"
                   />
                   <button
@@ -807,6 +810,7 @@ export function CategoriesPageClient({ initialCategories }: { initialCategories:
                     src={subPreviewUrl}
                     alt="Subcategory preview"
                     fill
+                    sizes="(max-width: 768px) 100vw, 440px"
                     className="object-contain"
                   />
                   <button

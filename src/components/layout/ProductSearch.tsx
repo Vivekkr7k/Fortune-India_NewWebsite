@@ -241,6 +241,7 @@ export function ProductSearch() {
                                 src={imgUrl}
                                 alt={product.name}
                                 fill
+                                sizes="48px"
                                 className="object-cover"
                               />
                             </div>
@@ -431,6 +432,7 @@ export function ProductSearch() {
                               src={imgUrl}
                               alt={product.name}
                               fill
+                              sizes="40px"
                               className="object-cover"
                             />
                           </div>

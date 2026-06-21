@@ -549,6 +549,7 @@ export default function CheckoutPage() {
                           src="/payment_qr.jpeg"
                           alt="Karnataka Bank UPI QR Code"
                           fill
+                          sizes="320px"
                           className="object-contain"
                         />
                       </div>
@@ -627,6 +628,7 @@ export default function CheckoutPage() {
                           src={item.image}
                           alt={item.name}
                           fill
+                          sizes="56px"
                           className="object-cover"
                         />
                       ) : (

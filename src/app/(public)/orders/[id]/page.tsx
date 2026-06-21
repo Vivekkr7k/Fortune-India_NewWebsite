@@ -105,6 +105,7 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
                           src={imgSrc}
                           alt={item.name}
                           fill
+                          sizes="48px"
                           className="object-cover"
                         />
                       ) : (

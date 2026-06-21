@@ -75,6 +75,7 @@ export function IndustrySolutions() {
                 src={ind.image} 
                 alt={ind.title} 
                 fill 
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover opacity-20 transition-transform duration-[1.5s] ease-out group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent"></div>

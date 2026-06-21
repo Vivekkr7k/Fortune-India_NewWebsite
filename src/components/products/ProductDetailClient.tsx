@@ -149,6 +149,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                 src={imagesList[activeImgIdx]}
                 alt={product.name}
                 fill
+                sizes="(max-width: 1024px) 100vw, 85vw"
                 className="object-contain"
               />
             </motion.div>
@@ -188,6 +189,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                     src={imagesList[activeImgIdx]}
                     alt={product.name}
                     fill
+                    sizes="(max-width: 1024px) 100vw, 58vw"
                     className="object-cover transition-transform duration-500 group-hover/gallery:scale-[1.02]"
                     priority
                   />
@@ -223,6 +225,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                       src={img}
                       alt={`${product.name} thumbnail ${idx + 1}`}
                       fill
+                      sizes="80px"
                       className="object-cover"
                     />
                   </button>

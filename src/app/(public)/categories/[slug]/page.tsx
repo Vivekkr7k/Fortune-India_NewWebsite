@@ -144,9 +144,6 @@ export default async function CategoryDetailPage({ params }: PageProps) {
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         className="object-contain"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = '/placeholder-category.png'
-                        }}
                       />
                     </div>
                   </div>
