@@ -3,14 +3,14 @@ import Link from 'next/link'
 import { Send, Phone, Mail, MapPin } from 'lucide-react'
 
 const TICKER_ITEMS = [
-  'NAMEPLATES',
-  'SAFETY LABELS',
-  'DECALS',
-  'FLEX BANNERS',
-  'PACKAGING',
-  'BARCODES',
-  'AEROSPACE LABELS',
-  'INDUSTRIAL PRINTS',
+  'DRONE PARTS',
+  'ELECTRONICS',
+  'CARBON FIBER',
+  'SENSORS',
+  'MOTORS',
+  'BATTERIES',
+  'DEVELOPMENT BOARDS',
+  'INDUSTRIAL SUPPLIES',
 ]
 
 export function Footer() {
@@ -40,11 +40,11 @@ export function Footer() {
               ☆ Fortune India
             </span>
             <span className="font-[var(--font-mono)] text-[10px] tracking-widest uppercase text-[var(--signal)] -mt-1">
-              Precision Printing
+              B2B Electronics & Drone Parts
             </span>
           </Link>
           <p className="italic text-white/70 text-[14px] leading-relaxed max-w-sm">
-            "Transforming Your Vision into Reality." Authorized supplier to HAL, BHEL, and TATA. Serving Aerospace, Defence, Automotive & Pharma.
+            "Transforming Your Vision into Reality." Premium supplier of drone parts, development boards, sensors, and carbon fiber B2B supplies.
           </p>
           <div className="flex flex-col gap-3 text-[13px] text-white/60 font-[var(--font-mono)]">
             <div className="flex items-start gap-2.5">
@@ -63,33 +63,28 @@ export function Footer() {
             </h4>
             <ul className="flex flex-col gap-2.5 text-[13px] text-white/75 font-[var(--font-body)]">
               <li>
-                <Link href="/products?category=nameplates" className="hover:text-white transition-colors">
-                  Nameplates
+                <Link href="/categories/rc-drone-car-agriculture-drone-parts" className="hover:text-white transition-colors">
+                  Drone & RC Parts
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=labels-decals" className="hover:text-white transition-colors">
-                  Labels & Decals
+                <Link href="/categories/electronics" className="hover:text-white transition-colors">
+                  Electronics & Sensors
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=stickers" className="hover:text-white transition-colors">
-                  Stickers
+                <Link href="/categories/carbon-fiber-products" className="hover:text-white transition-colors">
+                  Carbon Fiber
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=flex-banners" className="hover:text-white transition-colors">
-                  Flex & Banners
+                <Link href="/categories/hardware-tools-products" className="hover:text-white transition-colors">
+                  Tools & Hardware
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=packaging" className="hover:text-white transition-colors">
-                  Packaging
-                </Link>
-              </li>
-              <li>
-                <Link href="/products?category=barcode-labels" className="hover:text-white transition-colors">
-                  Barcode Labels
+                <Link href="/categories/industrial-tapes" className="hover:text-white transition-colors">
+                  Industrial Tapes
                 </Link>
               </li>
             </ul>

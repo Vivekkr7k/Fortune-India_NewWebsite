@@ -22,7 +22,7 @@ interface BlogPageClientProps {
 export default function BlogPageClient({ posts }: BlogPageClientProps) {
   const [activeCategory, setActiveCategory] = useState('All')
 
-  const categories = ['All', 'Industry News', 'Printing Guides', 'Company Updates']
+  const categories = ['All', 'Industry News', 'Guides', 'Company Updates']
 
   // Find the featured post
   const featuredPost = posts.find(p => p.featured) ?? posts[0]
@@ -57,7 +57,7 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
             The Fortune India Blog.
           </h1>
           <p className="font-[var(--font-body)] text-[15px] md:text-[17px] text-[var(--color-muted)] max-w-2xl leading-relaxed">
-            Industry news, printing guides, and company updates from Bangalore.
+            Industry news, technical guides, and company updates from Bangalore.
           </p>
         </div>
       </section>

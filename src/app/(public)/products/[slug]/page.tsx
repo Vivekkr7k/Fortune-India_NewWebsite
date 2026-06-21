@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const name = product.name ?? 'Product'
   const description =
     (product.description ?? '').slice(0, 160) ||
-    `${name} — precision printing from Fortune India, authorized supplier to HAL, BHEL & TATA.`
+    `${name} — high-quality components from Fortune India, premium B2B supplier of electronics & drone parts.`
   const image = product.image ? getProductImageUrl(product.image) : undefined
 
   return buildMetadata({
@@ -53,6 +53,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
   const productDoc = await Product.findOne(slugFilter(slug))
     .populate('category', '_id name slug')
+    .populate('subcategory', '_id name slug image')
     .lean<RawProduct>()
 
   if (!productDoc) {
@@ -66,6 +67,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
     active: { $ne: false },
   })
     .populate('category', '_id name slug')
+    .populate('subcategory', '_id name slug image')
     .limit(4)
     .lean<RawProduct[]>()
 

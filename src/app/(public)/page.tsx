@@ -4,6 +4,7 @@ import { toClientProduct, toClientCategory, type RawProduct } from '@/lib/serial
 import { BentoHero } from '@/components/home/BentoHero'
 import { TrustStrip } from '@/components/home/TrustStrip'
 import { SuppliersStrip } from '@/components/home/SuppliersStrip'
+import { CategoryGrid } from '@/components/home/CategoryGrid'
 import { FeaturedProducts } from '@/components/home/FeaturedProducts'
 import { StatsRow } from '@/components/home/StatsRow'
 import { IndustrySolutions } from '@/components/home/IndustrySolutions'
@@ -17,6 +18,7 @@ export default async function HomePage() {
   const [featuredDocs, categoryDocs] = await Promise.all([
     Product.find({ active: { $ne: false } })
       .populate('category', '_id name slug')
+      .populate('subcategory', '_id name slug image')
       .sort({ featured: -1, createdAt: -1 })
       .limit(6)
       .lean<RawProduct[]>(),
@@ -37,16 +39,19 @@ export default async function HomePage() {
       {/* Section 3: Suppliers Strip */}
       <SuppliersStrip />
 
-      {/* Section 4: Featured Products Grid */}
+      {/* Section 4: Categories Grid */}
+      <CategoryGrid categories={categories} />
+
+      {/* Section 5: Featured Products Grid */}
       <FeaturedProducts initialProducts={products} categories={categories} />
 
-      {/* Section 5: Stats Row */}
+      {/* Section 6: Stats Row */}
       <StatsRow />
 
-      {/* Section 6: Industry Solutions Grid */}
+      {/* Section 7: Industry Solutions Grid */}
       <IndustrySolutions />
 
-      {/* Section 7: CTA Banner */}
+      {/* Section 8: CTA Banner */}
       <CTABanner />
     </div>
   )

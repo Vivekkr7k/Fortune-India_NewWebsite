@@ -318,7 +318,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
             {/* Feature Chips */}
             <div className="flex flex-wrap gap-1.5 mb-6">
               <span className="bg-white border border-[var(--color-border-dark)] text-[var(--color-muted)] text-[10.5px] font-[var(--font-mono)] px-3 py-1 rounded-full uppercase tracking-wider">
-                Authorized Vendor
+                Verified Component
               </span>
               <span className="bg-white border border-[var(--border-dark)] text-[var(--color-muted)] text-[10.5px] font-[var(--font-mono)] px-3 py-1 rounded-full uppercase tracking-wider">
                 Industrial Spec

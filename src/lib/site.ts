@@ -10,13 +10,13 @@ const RAW_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://fortune-india-new-we
 
 export const SITE = {
   name: 'Fortune India',
-  legalName: 'Fortune India Precision Printing',
+  legalName: 'Fortune India B2B Components',
   shortName: 'Fortune India',
   // Absolute origin with no trailing slash — used to build canonical & OG URLs
   url: RAW_URL.replace(/\/+$/, ''),
   tagline: 'Transforming Your Vision into Reality',
   description:
-    'Fortune India is a Bangalore-based precision printing company and authorized supplier to HAL, BHEL & TATA. We manufacture industrial nameplates, safety labels, decals, barcode labels, flex banners and packaging for Aerospace, Defence, Automotive & Pharma — with pan-India delivery.',
+    'Fortune India is a Bangalore-based B2B store for electronics, drone and RC parts, carbon fiber products, sensors, development boards, and industrial supplies. We supply premium parts with pan-India delivery.',
   locale: 'en_IN',
   founded: '2009',
 
@@ -36,33 +36,22 @@ export const SITE = {
 
   // Brand / social
   ogImage: '/opengraph-image',
-  clients: ['HAL', 'BHEL', 'TATA'],
+  clients: [],
 
   // Default keyword set — surfaced sitewide and extended per page
   keywords: [
-    'precision printing',
-    'industrial nameplates',
-    'aluminium nameplates',
-    'stainless steel nameplates',
-    'safety labels',
-    'industrial labels',
-    'barcode labels',
-    'decals and stickers',
-    'flex banners',
-    'packaging printing',
-    'aerospace labels',
-    'defence nameplates',
-    'VIN plates',
-    'asset tags',
-    'tamper-proof labels',
-    'MIL-spec labels',
-    'OEM labels',
-    'HAL supplier',
-    'BHEL supplier',
-    'TATA supplier',
-    'printing company Bangalore',
-    'industrial printing India',
+    'drone parts',
+    'electronics',
+    'rc parts',
+    'carbon fiber sheets',
+    'sensors',
+    'development boards',
+    'motors',
+    'batteries',
+    'b2b electronics supplier',
+    'industrial components Bangalore',
     'Attibele Bangalore',
+    'B2B electronics India',
   ],
 } as const
 

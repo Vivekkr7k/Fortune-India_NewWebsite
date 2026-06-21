@@ -3,7 +3,7 @@ import { buildMetadata } from '@/lib/site'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Your Cart',
-  description: 'Review the precision printing products in your Fortune India cart before checkout.',
+  description: 'Review the products in your Fortune India cart before checkout.',
   path: '/cart',
   noindex: true,
 })

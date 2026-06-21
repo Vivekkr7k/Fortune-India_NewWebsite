@@ -1,47 +1,47 @@
 import Image from 'next/image'
-import { Plane, Shield, CarFront, Pill, Building2, Factory, ArrowRight } from 'lucide-react'
+import { Cpu, Layers, Wifi, Wrench, Boxes, Gauge, ArrowRight } from 'lucide-react'
 
 export function IndustrySolutions() {
   const industries = [
     {
-      title: 'Aerospace & Aviation',
-      specs: 'HAL · Cockpit Labels · MIL-Spec Nameplates',
-      icon: Plane,
-      glowColor: 'from-blue-500',
-      image: '/images/industry_aerospace.png',
-    },
-    {
-      title: 'Defence & Drone',
-      specs: 'DRDO · BHEL · Tactical Decals · Parts ID',
-      icon: Shield,
+      title: 'Drone & UAV Systems',
+      specs: 'Brushless Motors · ESCs · Propellers · Frames',
+      icon: Cpu,
       glowColor: 'from-orange-500',
       image: '/images/industry_defence.png',
     },
     {
-      title: 'Automotive',
-      specs: 'TATA · OEM Labels · VIN Plates · Dashboards',
-      icon: CarFront,
+      title: 'Robotics & Automation',
+      specs: 'Sensors · Actuators · Hardware · Microcontrollers',
+      icon: Gauge,
+      glowColor: 'from-blue-500',
+      image: '/images/industry_aerospace.png',
+    },
+    {
+      title: 'Carbon Fiber Structurals',
+      specs: 'Twill Sheets · Carbon Tubes · CNC Plates · Custom Cuts',
+      icon: Layers,
       glowColor: 'from-purple-500',
       image: '/images/industry_automotive.png',
     },
     {
-      title: 'Pharma',
-      specs: 'FDA Labels · Serialization · Tamper-Proof Seals',
-      icon: Pill,
+      title: 'Smart IoT & Prototyping',
+      specs: 'Development Boards · WiFi/BLE Modules · Prototyping Gear',
+      icon: Wifi,
       glowColor: 'from-emerald-500',
       image: '/images/industry_pharma.png',
     },
     {
-      title: 'Construction & Architecture',
-      specs: 'Signboards · ACP Printing · Wayfinding',
-      icon: Building2,
+      title: 'Industrial Assemblies',
+      specs: 'Double-Sided Tapes · Thermal Pads · Heat Shrink Tubes',
+      icon: Boxes,
       glowColor: 'from-amber-500',
       image: '/images/industry_construction.png',
     },
     {
-      title: 'Industrial & Heavy Machinery',
-      specs: 'BHEL · Safety Labels · Equipment Nameplates',
-      icon: Factory,
+      title: 'Custom Prototyping',
+      specs: 'Custom CNC Carbon Fiber · Precision Standoffs & Fasteners',
+      icon: Wrench,
       glowColor: 'from-cyan-500',
       image: '/images/industry_machinery.png',
     },
@@ -51,13 +51,13 @@ export function IndustrySolutions() {
     <section className="py-24 max-w-[var(--container)] mx-auto px-4 md:px-8">
       <div className="flex flex-col items-center text-center max-w-2xl mx-auto gap-3 mb-16">
         <span className="font-[var(--font-mono)] text-[11px] font-bold text-[var(--signal)] tracking-widest uppercase">
-          / INDUSTRY SOLUTIONS
+          / CORE APPLICATIONS
         </span>
         <h2 className="font-[var(--font-display)] text-[36px] md:text-[44px] font-extrabold text-[var(--ink)] tracking-tight leading-none">
           Built for Every Sector.
         </h2>
         <p className="font-[var(--font-body)] text-[15px] md:text-[16px] text-[var(--muted)] mt-2">
-          Fortune India supplies precision printing across India's most demanding industries.
+          Fortune India supplies premium electronics, drone parts, and carbon fiber products across India's engineering sectors.
         </p>
       </div>
 

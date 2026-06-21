@@ -63,7 +63,7 @@ export default function CartPage() {
               Your cart is empty
             </h2>
             <p className="font-[var(--font-body)] text-[15px] text-[var(--color-muted)] max-w-sm mb-8">
-              Add some precision printing products to get started. We support customized dimensions and bulk orders.
+              Add some products to your cart to get started. We support bulk orders and customized requirements.
             </p>
             <Link
               href="/products"

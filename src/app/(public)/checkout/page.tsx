@@ -299,7 +299,7 @@ export default function CheckoutPage() {
                   <input
                     type="text"
                     {...register('company')}
-                    placeholder="e.g. HAL, BHEL (Optional)"
+                    placeholder="e.g. Aerotech Dynamics (Optional)"
                     className="px-3.5 py-2.5 text-[14.5px] border border-[var(--color-border)] rounded-lg focus:outline-none focus:border-[var(--color-signal)]"
                   />
                 </div>

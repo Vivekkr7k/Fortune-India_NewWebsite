@@ -14,6 +14,15 @@ export interface ClientCategory {
   id: string
   name: string
   slug: string
+  image?: string | null
+}
+
+export interface ClientSubcategory {
+  id: string
+  name: string
+  slug: string
+  image?: string | null
+  category: string
 }
 
 // The product shape every client component (ProductGrid, FeaturedProducts,
@@ -30,6 +39,7 @@ export interface ClientProduct {
   shippingCharge: number
   images: string
   category: ClientCategory
+  subcategory?: ClientSubcategory | null
   stock: number
   specs: string | null
   brand: string
@@ -44,6 +54,7 @@ interface RawCategory {
   _id?: unknown
   name?: string
   slug?: string
+  image?: string
 }
 
 // Raw lean() product doc from the `foods` collection with populated category
@@ -56,6 +67,7 @@ export interface RawProduct {
   shippingCharge?: number
   image?: string
   category?: RawCategory | null
+  subcategory?: any
   stock?: number
   featured?: boolean
   active?: boolean
@@ -73,6 +85,19 @@ export function toClientCategory(cat: RawCategory | null | undefined): ClientCat
     id: String(cat?._id ?? ''),
     name,
     slug: cat?.slug || slugify(name),
+    image: cat?.image || null,
+  }
+}
+
+export function toClientSubcategory(sub: any): ClientSubcategory | null {
+  if (!sub) return null
+  const name = sub.name ?? 'Uncategorized'
+  return {
+    id: String(sub._id ?? ''),
+    name,
+    slug: sub.slug || slugify(name),
+    image: sub.image || null,
+    category: String(sub.category?._id || sub.category || ''),
   }
 }
 
@@ -89,6 +114,7 @@ export function toClientProduct(p: RawProduct): ClientProduct {
     shippingCharge: p.shippingCharge ?? 0,
     images: JSON.stringify(imageUrl ? [imageUrl] : []),
     category: toClientCategory(p.category),
+    subcategory: toClientSubcategory(p.subcategory),
     stock: p.stock ?? 999,
     specs: null,
     brand: p.brand || 'Fortune India',

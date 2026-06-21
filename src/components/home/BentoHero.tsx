@@ -45,13 +45,13 @@ export function BentoHero() {
 
           <div className="flex flex-col gap-4 relative z-10">
             <span className="font-[var(--font-mono)] text-[11px] font-bold text-[var(--signal)] tracking-widest uppercase bg-white/50 w-fit px-2 py-1 rounded-sm backdrop-blur-sm">
-              / Precision Printing Solutions
+              / B2B Electronics & Drone Parts
             </span>
             <h1 className="font-[var(--font-display)] text-[32px] md:text-[46px] font-extrabold text-[var(--ink)] leading-[1.15] tracking-tight drop-shadow-sm" style={{ fontSize: 'clamp(26px, 3.2vw, 44px)' }}>
               Transforming Your Vision into Reality.
             </h1>
             <p className="font-[var(--font-body)] text-[14px] md:text-[15px] text-[var(--body-text)] leading-relaxed max-w-lg bg-white/40 p-2 rounded-lg backdrop-blur-sm" style={{ marginBottom: '12px' }}>
-              High-quality, durable, and precision printing solutions trusted by Aerospace, Defence, Automotive &amp; Pharma industries.
+              High-quality drone parts, carbon fiber sheets, sensors, development boards, and B2B electronics for modern engineering projects.
             </p>
           </div>
 
@@ -59,10 +59,10 @@ export function BentoHero() {
             {/* Chips */}
             <div className="flex flex-wrap gap-[6px] mb-[16px]">
               <span className="bg-white/90 backdrop-blur-md border border-[var(--border)] text-[var(--ink)] text-[11px] font-semibold font-[var(--font-mono)] px-3 py-1.5 rounded-full shadow-sm">
-                ISO Precision
+                Premium Quality
               </span>
               <span className="bg-white/90 backdrop-blur-md border border-[var(--border)] text-[var(--ink)] text-[11px] font-semibold font-[var(--font-mono)] px-3 py-1.5 rounded-full shadow-sm">
-                HAL · BHEL · TATA
+                B2B Electronics
               </span>
               <span className="bg-white/90 backdrop-blur-md border border-[var(--border)] text-[var(--ink)] text-[11px] font-semibold font-[var(--font-mono)] px-3 py-1.5 rounded-full shadow-sm">
                 Pan-India Delivery
@@ -97,8 +97,8 @@ export function BentoHero() {
         >
           <div className="w-full h-full flex items-center justify-center relative">
             <Image 
-              src="/images/precision-metal-etching.png" 
-              alt="Precision Metal Etching" 
+              src="/images/carbon_fiber.png" 
+              alt="Carbon Fiber Structurals" 
               fill 
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
@@ -106,8 +106,8 @@ export function BentoHero() {
 
             <div className="flex flex-col items-center gap-2 z-10 text-center px-4">
               <span className="text-[28px] drop-shadow-md">🛠️</span>
-              <span className="font-[var(--font-display)] text-[15px] font-bold text-white drop-shadow-md">Precision Metal Etching</span>
-              <span className="font-[var(--font-mono)] text-[10px] text-white/80 font-semibold tracking-wide">Industrial Nameplates</span>
+              <span className="font-[var(--font-display)] text-[15px] font-bold text-white drop-shadow-md">Carbon Fiber Structurals</span>
+              <span className="font-[var(--font-mono)] text-[10px] text-white/80 font-semibold tracking-wide">High-Strength Sheets & Parts</span>
             </div>
             
             {/* Badge bottom-right */}
@@ -123,8 +123,8 @@ export function BentoHero() {
           className="md:col-span-3 rounded-[var(--r-xl)] p-6 flex flex-col justify-between md:h-full relative overflow-hidden group shadow-[var(--sh-card)] border border-[#333]"
         >
           <Image 
-            src="/images/military-spec-printing.png" 
-            alt="Military Spec Printing" 
+            src="/images/drone_parts.png" 
+            alt="Drone & RC Parts" 
             fill 
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
@@ -132,20 +132,20 @@ export function BentoHero() {
 
           <div className="flex flex-col gap-3 relative z-10">
             <div className="w-8 h-8 rounded-full bg-[var(--signal)] flex items-center justify-center text-[15px] shadow-lg shadow-[var(--signal)]/20">
-              🛡️
+              🚁
             </div>
             <span className="font-[var(--font-mono)] text-[9px] font-bold text-[var(--signal)] tracking-widest uppercase drop-shadow-md">
-              DEFENCE GRADE
+              HIGH PERFORMANCE
             </span>
             <h3 className="font-[var(--font-display)] text-[18px] font-bold text-white leading-tight drop-shadow-md">
-              Military-Spec Printing
+              Brushless Motors & RC Parts
             </h3>
             <p className="text-[12px] text-[#A0A0A0] leading-relaxed drop-shadow-sm font-medium">
-              Certified supplier to Defence, Drone &amp; Aviation. Precision nameplates, decals &amp; technical labels.
+              High-performance brushless motors, ESCs, propellers, and RC components for commercial drone assemblies.
             </p>
           </div>
           <Link
-            href="/products?category=labels-decals"
+            href="/products?category=drone-rc-parts"
             className="font-[var(--font-mono)] text-[11px] text-[var(--signal)] hover:text-white transition-colors flex items-center gap-1.5 mt-4 md:mt-0 relative z-10 w-fit drop-shadow-md"
           >
             Explore Range <ArrowRight size={12} />
@@ -162,7 +162,7 @@ export function BentoHero() {
               15+
             </span>
             <span className="font-[var(--font-body)] text-[13px] text-[var(--muted)] mt-1.5 leading-snug">
-              Years in Precision Printing
+              Years in B2B Components
             </span>
           </div>
           <div className="w-10 h-10 rounded-full bg-[var(--signal-tint)] flex items-center justify-center text-[16px] text-[var(--signal)]">
@@ -218,10 +218,10 @@ export function BentoHero() {
             ★ ★ ★ ★ ★
           </div>
           <p className="italic text-[12px] text-[var(--body-text)] leading-snug mt-2">
-            "Absolute micron-level accuracy. The anodized aluminium plates exceeded our aerospace standards."
+            "Outstanding component build quality and consistent specifications. The drone motors and carbon fiber sheets exceeded our engineering standards."
           </p>
           <span className="font-[var(--font-mono)] text-[9px] uppercase tracking-wider text-[var(--muted)] mt-1.5 block">
-            — HAL Procurement
+            — AeroVanguard Technologies
           </span>
         </motion.div>
       </div>

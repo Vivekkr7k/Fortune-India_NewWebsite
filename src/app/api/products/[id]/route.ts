@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/lib/mongoose'
 import { Product } from '@/models'
+import mongoose from 'mongoose'
 
 const OBJECT_ID_RE = /^[0-9a-fA-F]{24}$/
 
@@ -34,6 +35,11 @@ export async function PUT(req: NextRequest, { params }: Params) {
   try {
     await connectDB()
     const { id } = await params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+    }
+
     const body = await req.json()
 
     const product = await Product.findByIdAndUpdate(id, body, { new: true })
@@ -51,6 +57,11 @@ export async function DELETE(_req: NextRequest, { params }: Params) {
   try {
     await connectDB()
     const { id } = await params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+    }
+
     await Product.findByIdAndDelete(id)
     return NextResponse.json({ success: true })
   } catch (err) {

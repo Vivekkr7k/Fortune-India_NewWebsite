@@ -11,6 +11,14 @@ interface Category {
   slug: string
 }
 
+interface Subcategory {
+  id: string
+  name: string
+  slug: string
+  image?: string | null
+  category: string
+}
+
 interface Product {
   id: string
   slug: string
@@ -25,6 +33,11 @@ interface Product {
     name: string
     slug: string
   }
+  subcategory?: {
+    id: string
+    name: string
+    slug: string
+  } | null
   stock: number
   specs: string | null
   brand: string
@@ -38,6 +51,10 @@ interface Product {
 interface ProductsPageClientProps {
   products: Product[]
   categories: Category[]
+  subcategories: Subcategory[]
+  initialSearch?: string
+  initialCategory?: string
+  initialSubcategory?: string
 }
 
 const PER_PAGE = 12
@@ -65,15 +82,37 @@ function getPageNumbers(currentPage: number, totalPages: number): (number | '…
   return result
 }
 
-export function ProductsPageClient({ products, categories }: ProductsPageClientProps) {
-  const [activeCategory, setActiveCategory] = useState('all')
+export function ProductsPageClient({
+  products,
+  categories,
+  subcategories,
+  initialSearch = '',
+  initialCategory = 'all',
+  initialSubcategory = 'all'
+}: ProductsPageClientProps) {
+  const [activeCategory, setActiveCategory] = useState(initialCategory)
+  const [activeSubcategory, setActiveSubcategory] = useState(initialSubcategory)
   const [sortBy, setSortBy] = useState('newest')
-  const [searchInput, setSearchInput] = useState('') // what the user sees, updates instantly
-  const [search, setSearch] = useState('')           // debounced value that drives the filter
+  const [searchInput, setSearchInput] = useState(initialSearch) // what the user sees, updates instantly
+  const [search, setSearch] = useState(initialSearch)           // debounced value that drives the filter
   const [page, setPage] = useState(1)
   const [isFiltering, setIsFiltering] = useState(false)
   const gridTopRef = useRef<HTMLDivElement>(null)
   const isFirstRender = useRef(true)
+
+  // Sync URL parameters when they change
+  useEffect(() => {
+    setSearchInput(initialSearch)
+    setSearch(initialSearch)
+  }, [initialSearch])
+
+  useEffect(() => {
+    setActiveCategory(initialCategory)
+  }, [initialCategory])
+
+  useEffect(() => {
+    setActiveSubcategory(initialSubcategory)
+  }, [initialSubcategory])
 
   // Debounce: run the filter only after 300ms of no typing
   useEffect(() => {
@@ -81,9 +120,26 @@ export function ProductsPageClient({ products, categories }: ProductsPageClientP
     return () => clearTimeout(t)
   }, [searchInput])
 
+  // Reset activeSubcategory on category changes
+  useEffect(() => {
+    if (isFirstRender.current) return
+    if (activeCategory === 'all') {
+      setActiveSubcategory('all')
+      return
+    }
+    if (activeSubcategory !== 'all') {
+      const sub = subcategories.find(s => s.slug === activeSubcategory)
+      const cat = categories.find(c => c.slug === activeCategory)
+      if (!sub || !cat || sub.category !== cat.id) {
+        setActiveSubcategory('all')
+      }
+    }
+  }, [activeCategory, subcategories, categories, activeSubcategory])
+
   // Filtered and sorted products
   const filtered = products
     .filter((p) => activeCategory === 'all' || p.category.slug === activeCategory)
+    .filter((p) => activeSubcategory === 'all' || (p.subcategory && p.subcategory.slug === activeSubcategory))
     .filter((p) => search === '' || p.name.toLowerCase().includes(search.toLowerCase()))
     .sort((a, b) => {
       if (sortBy === 'price-asc') return a.price - b.price
@@ -98,7 +154,7 @@ export function ProductsPageClient({ products, categories }: ProductsPageClientP
   // Reset page to 1 when any filter changes
   useEffect(() => {
     setPage(1)
-  }, [activeCategory, search, sortBy])
+  }, [activeCategory, activeSubcategory, search, sortBy])
 
   // Brief fade on category switch for visual feedback
   useEffect(() => {
@@ -106,7 +162,7 @@ export function ProductsPageClient({ products, categories }: ProductsPageClientP
     setIsFiltering(true)
     const t = setTimeout(() => setIsFiltering(false), 150)
     return () => clearTimeout(t)
-  }, [activeCategory])
+  }, [activeCategory, activeSubcategory])
 
   // Scroll back to the top of the grid when the page changes
   useEffect(() => {
@@ -121,6 +177,7 @@ export function ProductsPageClient({ products, categories }: ProductsPageClientP
     setSearchInput('')
     setSearch('')
     setActiveCategory('all')
+    setActiveSubcategory('all')
   }
 
   const activeCategoryName = categories.find((c) => c.slug === activeCategory)?.name
@@ -130,8 +187,11 @@ export function ProductsPageClient({ products, categories }: ProductsPageClientP
       {/* Sticky Filter Bar */}
       <FilterBar
         categories={categories}
+        subcategories={subcategories}
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
+        activeSubcategory={activeSubcategory}
+        setActiveSubcategory={setActiveSubcategory}
         search={searchInput}
         setSearch={setSearchInput}
         sortBy={sortBy}
@@ -142,9 +202,9 @@ export function ProductsPageClient({ products, categories }: ProductsPageClientP
       />
 
       {/* Products Display Section */}
-      <div className="flex-grow max-w-[var(--container)] mx-auto w-full px-4 md:px-8 py-8 pb-20">
+      <div className="flex-grow max-w-[var(--container)] mx-auto w-full px-4 md:px-8 py-4 pb-20">
         {/* Scroll anchor — offset accounts for the sticky header + compact filter bar */}
-        <div ref={gridTopRef} className="scroll-mt-[130px]" aria-hidden="true" />
+        <div ref={gridTopRef} className="scroll-mt-[100px]" aria-hidden="true" />
 
         {filtered.length > 0 ? (
           <div className="flex flex-col gap-10">
@@ -153,7 +213,7 @@ export function ProductsPageClient({ products, categories }: ProductsPageClientP
                   replays — without it, framer-motion leaves newly-mounted cards
                   stuck in their hidden (opacity-0) variant */}
               <ProductGrid
-                key={`${activeCategory}|${search}|${sortBy}|${page}`}
+                key={`${activeCategory}|${activeSubcategory}|${search}|${sortBy}|${page}`}
                 products={paginated}
               />
             </div>

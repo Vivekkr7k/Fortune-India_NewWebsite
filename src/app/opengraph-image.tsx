@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 import { SITE } from '@/lib/site'
 
-export const alt = 'Fortune India — Precision Printing, Industrial Nameplates & Labels'
+export const alt = 'Fortune India — Premium Electronics, Drone & RC Parts'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -45,11 +45,11 @@ export default function OpengraphImage() {
               maxWidth: 980,
             }}
           >
-            Precision Printing, Nameplates & Industrial Labels
+            Premium Electronics, Drone Parts & Industrial Components
           </div>
           <div style={{ fontSize: 30, color: '#B5B5B5', maxWidth: 900 }}>
-            Authorized supplier to HAL · BHEL · TATA — Aerospace, Defence,
-            Automotive & Pharma. Pan-India delivery from Bangalore.
+            Premium B2B supplier of RC & Drone Parts, Sensors, Carbon Fiber,
+            Development Boards & Industrial Supplies. Pan-India delivery.
           </div>
         </div>
 

@@ -11,9 +11,7 @@ export function AnnouncementStrip() {
     <div className="bg-[var(--signal)] text-white py-2.5 px-4 relative flex items-center justify-center text-center font-[var(--font-mono)] text-[12px] tracking-wider font-semibold z-50">
       <div className="flex items-center gap-2 flex-wrap justify-center pr-8">
         <ShieldCheck size={14} className="text-white shrink-0" />
-        <span>AUTHORIZED SUPPLIER TO: <strong>HAL · BHEL · TATA</strong></span>
-        <span className="hidden md:inline">|</span>
-        <span>B2B PRECISION PRINTING PARTNER</span>
+        <span>DRONE PARTS · ELECTRONICS · CARBON FIBER & INDUSTRIAL SUPPLIES</span>
         <span className="hidden md:inline">|</span>
         <span>PAN-INDIA SHIPPING FROM BANGALORE</span>
       </div>

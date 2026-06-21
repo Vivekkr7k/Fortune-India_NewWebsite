@@ -24,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: 'Fortune India — Precision Printing, Industrial Nameplates & Labels',
+    default: 'Fortune India — Drone Parts, Carbon Fiber & Electronics',
     template: '%s | Fortune India',
   },
   description: SITE.description,
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
   authors: [{ name: SITE.legalName, url: SITE.url }],
   creator: SITE.legalName,
   publisher: SITE.legalName,
-  category: 'Manufacturing',
+  category: 'B2B Electronics & Industrial Supplies',
   alternates: { canonical: '/' },
   formatDetection: { telephone: true, email: true, address: true },
   openGraph: {
     type: 'website',
     siteName: SITE.name,
-    title: 'Fortune India — Precision Printing, Industrial Nameplates & Labels',
+    title: 'Fortune India — Drone Parts, Carbon Fiber & Electronics',
     description: SITE.description,
     url: SITE.url,
     locale: SITE.locale,
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fortune India — Precision Printing, Industrial Nameplates & Labels',
+    title: 'Fortune India — Drone Parts, Carbon Fiber & Electronics',
     description: SITE.description,
     images: [SITE.ogImage],
   },

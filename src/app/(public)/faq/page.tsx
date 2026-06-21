@@ -6,12 +6,12 @@ import { FaqAccordion, type FaqCategory } from '@/components/faq/FaqAccordion'
 export const metadata: Metadata = buildMetadata({
   title: 'Frequently Asked Questions',
   description:
-    'Answers to common questions about Fortune India precision printing — ordering, bulk pricing, delivery timelines, materials, customization, GST invoicing and our HAL, BHEL & TATA supplier credentials.',
+    'Answers to common questions about Fortune India — ordering, bulk pricing, delivery timelines, electronics, drone parts, GST invoicing, and custom supplies.',
   path: '/faq',
   keywords: [
     'fortune india faq',
-    'precision printing questions',
-    'bulk order printing india',
+    'drone parts and electronics questions',
+    'bulk order components india',
     'nameplate minimum order quantity',
     'industrial label delivery time',
     'custom nameplate quote',
@@ -35,7 +35,7 @@ const FAQ_GROUPS: FaqCategory[] = [
       {
         question: 'Do you provide GST invoices and work with PSU/enterprise procurement?',
         answer:
-          'Yes. We issue GST-compliant invoices and are set up for B2B and PSU procurement workflows, including purchase orders and dedicated account management. We are an authorized supplier to HAL, BHEL and TATA.',
+          'Yes. We issue GST-compliant invoices and are set up for B2B and PSU procurement workflows, including purchase orders and dedicated account management.',
       },
       {
         question: 'What payment methods do you accept?',
@@ -55,12 +55,12 @@ const FAQ_GROUPS: FaqCategory[] = [
       {
         question: 'What products does Fortune India manufacture?',
         answer:
-          'Industrial nameplates (aluminium and stainless steel), safety labels, decals and stickers, barcode and asset-tracking labels, flex banners, packaging and signage. We specialise in precision, durable and MIL-spec grade printing.',
+          'Premium B2B electronics, drone and RC parts, carbon fiber sheets and tubes, sensors, development boards, motors, batteries, and industrial supplies.',
       },
       {
-        question: 'Can you match specific standards like MIL-spec or aerospace labelling?',
+        question: 'Can you supply custom dimensions or bulk parts for aerospace and defence?',
         answer:
-          'Yes. We produce to tolerances that meet aerospace and defence requirements and supply MIL-spec nameplates, cockpit labels and parts-ID labels. Share your standard or drawing and we will confirm compliance before production.',
+          'Yes. We supply carbon fiber components, customized electronic modules, and wiring assemblies that meet high aerospace and defence standards. Share your drawings or data sheet and we will confirm specifications.',
       },
       {
         question: 'Do you offer fully custom artwork, sizes and materials?',
@@ -105,7 +105,7 @@ const FAQ_GROUPS: FaqCategory[] = [
       {
         question: 'How long has Fortune India been in business?',
         answer:
-          'We have been serving India’s industrial sector since 2009 — over 15 years of precision printing for the country’s most demanding aerospace, defence and manufacturing clients.',
+          'We have been serving India’s industrial sector since 2009 — over 15 years of supplying components and parts for the country’s most demanding aerospace, defence and manufacturing clients.',
       },
     ],
   },
@@ -147,9 +147,8 @@ export default function FaqPage() {
             Frequently Asked Questions
           </h1>
           <p className="font-[var(--font-body)] text-[15px] md:text-[17px] text-[var(--color-body)] max-w-2xl leading-relaxed">
-            Everything you need to know about ordering precision printing from
-            Fortune India — pricing, customization, delivery and our supplier
-            credentials. Can&rsquo;t find your answer? {' '}
+            Everything you need to know about ordering electronics, drone parts, and B2B supplies from
+            Fortune India — pricing, customization, and delivery. Can&rsquo;t find your answer? {' '}
             <Link href="/contact" className="text-[var(--color-signal)] font-semibold hover:underline">
               Talk to our team
             </Link>.

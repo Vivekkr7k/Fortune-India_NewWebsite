@@ -5,10 +5,10 @@ export function CTABanner() {
     <section className="bg-[var(--signal)] py-16 md:py-24 text-white">
       <div className="max-w-[var(--container)] mx-auto px-4 md:px-8 flex flex-col items-center text-center gap-6 md:gap-8">
         <h2 className="font-[var(--font-display)] text-[28px] md:text-[48px] font-extrabold text-white tracking-tight leading-[1.1] max-w-3xl">
-          Ready to Start Your Print Order?
+          Ready to Source B2B Electronics & Drone Parts?
         </h2>
         <p className="font-[var(--font-body)] text-[15px] md:text-[17px] text-white/95 max-w-xl leading-relaxed">
-          Join 200+ businesses who trust Fortune India for precision printing. Get durable metal engraving, chemical etching, and spec decals.
+          Join 200+ businesses who trust Fortune India for premium B2B components. Get durable carbon fiber products, sensors, motors, and electronic supplies.
         </p>
         
         <div className="flex flex-wrap items-center justify-center gap-4 mt-2">

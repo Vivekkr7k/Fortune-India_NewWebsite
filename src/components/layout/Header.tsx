@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useCartStore } from '@/store/cart'
 import { ShoppingCart, Menu, X } from 'lucide-react'
 import Image from 'next/image'
+import { ProductSearch } from './ProductSearch'
 
 export function Header() {
   const [mounted, setMounted] = useState(false)
@@ -16,7 +17,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 w-full bg-white/95 backdrop-blur-md border-b border-[var(--border)] z-40">
-      <div className="max-w-[var(--container)] mx-auto px-4 md:px-8 h-16 md:h-[80px] flex items-center justify-between">
+      <div className="max-w-[var(--container)] mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
         
         {/* LOGO */}
         <Link href="/" className="flex items-center group">
@@ -25,7 +26,7 @@ export function Header() {
             alt="Fortune India Logo"
             width={400}
             height={120}
-            className="h-12 md:h-16 w-auto object-contain scale-[1.4] origin-left transition-transform group-hover:scale-[1.45]"
+            className="h-10 md:h-11 w-auto object-contain scale-[1.25] origin-left transition-transform group-hover:scale-[1.3]"
             priority
           />
         </Link>
@@ -51,6 +52,9 @@ export function Header() {
 
         {/* ACTIONS */}
         <div className="flex items-center gap-4">
+          {/* Product Search */}
+          <ProductSearch />
+
           {/* Cart Icon Link */}
           <Link 
             href="/cart" 

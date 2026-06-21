@@ -146,7 +146,7 @@ export default function ContactPage() {
                       id="company"
                       type="text"
                       {...register('company')}
-                      placeholder="e.g. TATA Advanced Systems"
+                      placeholder="e.g. Aerotech Dynamics"
                       className="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-canvas)] text-[var(--color-ink)] font-[var(--font-body)] text-[14px] focus:outline-none focus:ring-2 focus:ring-[var(--color-signal)] focus:border-transparent transition-all placeholder:text-[var(--color-muted)]/60"
                     />
                   </div>
@@ -160,7 +160,7 @@ export default function ContactPage() {
                       id="email"
                       type="email"
                       {...register('email')}
-                      placeholder="e.g. rajesh@tata.com"
+                      placeholder="e.g. rajesh@aerotech.com"
                       className="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-canvas)] text-[var(--color-ink)] font-[var(--font-body)] text-[14px] focus:outline-none focus:ring-2 focus:ring-[var(--color-signal)] focus:border-transparent transition-all placeholder:text-[var(--color-muted)]/60"
                     />
                     {errors.email && (
