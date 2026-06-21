@@ -43,10 +43,11 @@ interface OrderData {
   shipping: number
   gst: number
   total: number
-  paymentMethod: 'RAZORPAY' | 'COD' | 'BANK_TRANSFER' | 'UPI_QR'
+  paymentMethod: 'RAZORPAY' | 'BANK_TRANSFER' | 'UPI_QR'
   razorpayOrderId?: string
   razorpayPaymentId?: string
   upiTransactionId?: string
+  bankTransactionId?: string
   paymentStatus: 'PENDING' | 'PAID' | 'FAILED'
   status: 'PENDING' | 'CONFIRMED' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED'
   notes?: string
@@ -108,7 +109,8 @@ export function OrdersPageClient({ initialOrders }: { initialOrders: OrderData[]
       order.orderNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
       order.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       order.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (order.upiTransactionId && order.upiTransactionId.includes(searchTerm))
+      (order.upiTransactionId && order.upiTransactionId.includes(searchTerm)) ||
+      (order.bankTransactionId && order.bankTransactionId.includes(searchTerm))
 
     return matchesStatus && matchesSearch
   })
@@ -231,8 +233,6 @@ export function OrdersPageClient({ initialOrders }: { initialOrders: OrderData[]
                       <span className="text-[13px] text-[var(--color-body)] font-bold uppercase">
                         {order.paymentMethod === 'RAZORPAY' 
                           ? 'Razorpay' 
-                          : order.paymentMethod === 'COD' 
-                          ? 'COD' 
                           : order.paymentMethod === 'UPI_QR' 
                           ? 'UPI QR' 
                           : 'NEFT'}
@@ -317,7 +317,12 @@ export function OrdersPageClient({ initialOrders }: { initialOrders: OrderData[]
                             </div>
                             {order.upiTransactionId && (
                               <span className="text-[11px] text-[var(--color-muted)] font-mono break-all mt-1">
-                                UTR: <strong className="text-[var(--color-body)]">{order.upiTransactionId}</strong>
+                                UPI UTR: <strong className="text-[var(--color-body)]">{order.upiTransactionId}</strong>
+                              </span>
+                            )}
+                            {order.bankTransactionId && (
+                              <span className="text-[11px] text-[var(--color-muted)] font-mono break-all mt-1">
+                                NEFT Ref: <strong className="text-[var(--color-body)]">{order.bankTransactionId}</strong>
                               </span>
                             )}
                           </div>

@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
     const { items, customer, paymentMethod } = body as {
       items: IncomingItem[]
       customer: Record<string, string | undefined>
-      paymentMethod: 'RAZORPAY' | 'COD' | 'BANK_TRANSFER' | 'UPI_QR'
+      paymentMethod: 'RAZORPAY' | 'BANK_TRANSFER' | 'UPI_QR'
     }
 
     // Validate required fields up front
@@ -95,9 +95,14 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // UPI QR requires transaction ID verification
+    // UPI QR requires transaction ID
     if (paymentMethod === 'UPI_QR' && !(body as any).upiTransactionId) {
       return NextResponse.json({ error: 'UPI Transaction ID / UTR Number is required for QR payments.' }, { status: 400 })
+    }
+
+    // Bank Transfer requires transaction reference
+    if (paymentMethod === 'BANK_TRANSFER' && !(body as any).bankTransactionId) {
+      return NextResponse.json({ error: 'NEFT/RTGS Transaction Reference / UTR is required for Bank Transfer payments.' }, { status: 400 })
     }
 
     const subtotal = round2(items.reduce((s, i) => s + i.price * i.quantity, 0))
@@ -136,7 +141,8 @@ export async function POST(req: NextRequest) {
       gst,
       total,
       paymentMethod,
-      upiTransactionId: paymentMethod === 'UPI_QR' ? (body as any).upiTransactionId : undefined,
+      upiTransactionId:  paymentMethod === 'UPI_QR'        ? (body as any).upiTransactionId  : undefined,
+      bankTransactionId: paymentMethod === 'BANK_TRANSFER' ? (body as any).bankTransactionId : undefined,
       paymentStatus: 'PENDING',
       status: paymentMethod === 'RAZORPAY' ? 'PENDING' : 'CONFIRMED',
     })

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { ShoppingCart, ShieldCheck, CreditCard, Landmark, Truck, QrCode } from 'lucide-react'
+import { ShoppingCart, ShieldCheck, CreditCard, Landmark, QrCode } from 'lucide-react'
 import { useCartStore } from '@/store/cart'
 import { formatPrice } from '@/lib/utils'
 import { toast } from 'sonner'
@@ -24,8 +24,9 @@ const checkoutSchema = z.object({
   gst: z.string().optional(),
   poNumber: z.string().optional(),
   notes: z.string().optional(),
-  paymentMethod: z.enum(['RAZORPAY', 'COD', 'BANK_TRANSFER', 'UPI_QR']),
+  paymentMethod: z.enum(['RAZORPAY', 'BANK_TRANSFER', 'UPI_QR']),
   upiTransactionId: z.string().optional(),
+  bankTransactionId: z.string().optional(),
 }).superRefine((data, ctx) => {
   if (data.paymentMethod === 'UPI_QR') {
     if (!data.upiTransactionId || data.upiTransactionId.trim().length < 6) {
@@ -33,6 +34,15 @@ const checkoutSchema = z.object({
         code: z.ZodIssueCode.custom,
         message: 'UPI Transaction ID / UTR is required (minimum 6 characters)',
         path: ['upiTransactionId'],
+      });
+    }
+  }
+  if (data.paymentMethod === 'BANK_TRANSFER') {
+    if (!data.bankTransactionId || data.bankTransactionId.trim().length < 6) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Transaction Reference / UTR number is required after making the transfer (minimum 6 characters)',
+        path: ['bankTransactionId'],
       });
     }
   }
@@ -146,6 +156,7 @@ export default function CheckoutPage() {
           customer: data,
           paymentMethod: data.paymentMethod,
           upiTransactionId: data.paymentMethod === 'UPI_QR' ? data.upiTransactionId : undefined,
+          bankTransactionId: data.paymentMethod === 'BANK_TRANSFER' ? data.bankTransactionId : undefined,
         })
       })
 
@@ -480,38 +491,80 @@ export default function CheckoutPage() {
                   <CreditCard size={18} className="text-[var(--color-signal)] shrink-0 hidden sm:block" />
                 </label>
 
-                {/* Cash on Delivery Option */}
-                <label className={`border rounded-[14px] p-4 flex items-center justify-between cursor-pointer transition-all ${selectedPaymentMethod === 'COD' ? 'border-[var(--color-signal)] border-2 bg-[var(--color-signal-tint)]' : 'border-[var(--color-border)] hover:border-[var(--color-border-dark)] bg-white'}`}>
-                  <div className="flex items-center gap-3.5">
-                    <input
-                      type="radio"
-                      value="COD"
-                      {...register('paymentMethod')}
-                      className="accent-[var(--color-signal)] w-4 h-4 cursor-pointer"
-                    />
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-[14px] font-bold text-[var(--color-ink)]">Cash on Delivery (COD)</span>
-                      <span className="text-[12px] text-[var(--color-muted)]">Pay by Cash / UPI upon receiving delivery at Attibele/Bangalore</span>
-                    </div>
-                  </div>
-                  <Truck size={18} className="text-[var(--color-signal)] shrink-0 hidden sm:block" />
-                </label>
 
                 {/* Bank Transfer Option */}
-                <label className={`border rounded-[14px] p-4 flex items-center justify-between cursor-pointer transition-all ${selectedPaymentMethod === 'BANK_TRANSFER' ? 'border-[var(--color-signal)] border-2 bg-[var(--color-signal-tint)]' : 'border-[var(--color-border)] hover:border-[var(--color-border-dark)] bg-white'}`}>
-                  <div className="flex items-center gap-3.5">
-                    <input
-                      type="radio"
-                      value="BANK_TRANSFER"
-                      {...register('paymentMethod')}
-                      className="accent-[var(--color-signal)] w-4 h-4 cursor-pointer"
-                    />
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-[14px] font-bold text-[var(--color-ink)]">NEFT / Bank Transfer</span>
-                      <span className="text-[12px] text-[var(--color-muted)]">Official bank account invoice details shared to email</span>
+                <label className={`border rounded-[14px] p-4 flex flex-col gap-4 cursor-pointer transition-all ${selectedPaymentMethod === 'BANK_TRANSFER' ? 'border-[var(--color-signal)] border-2 bg-[var(--color-signal-tint)]' : 'border-[var(--color-border)] hover:border-[var(--color-border-dark)] bg-white'}`}>
+                  <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center gap-3.5">
+                      <input
+                        type="radio"
+                        value="BANK_TRANSFER"
+                        {...register('paymentMethod')}
+                        className="accent-[var(--color-signal)] w-4 h-4 cursor-pointer"
+                      />
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-[14px] font-bold text-[var(--color-ink)]">NEFT / Bank Transfer</span>
+                        <span className="text-[12px] text-[var(--color-muted)]">Transfer directly to our Karnataka Bank account</span>
+                      </div>
                     </div>
+                    <Landmark size={18} className="text-[var(--color-signal)] shrink-0 hidden sm:block" />
                   </div>
-                  <Landmark size={18} className="text-[var(--color-signal)] shrink-0 hidden sm:block" />
+
+                  {selectedPaymentMethod === 'BANK_TRANSFER' && (
+                    <div className="border-t border-[var(--color-border-light)] pt-4 mt-2 flex flex-col gap-4 bg-white p-4 rounded-xl border w-full cursor-default" onClick={(e) => e.stopPropagation()}>
+                      {/* Bank Details Card */}
+                      <div className="flex flex-col gap-0 rounded-xl overflow-hidden border border-[var(--color-signal)]/20">
+                        <div className="bg-[var(--color-signal)] px-4 py-2.5 flex items-center gap-2">
+                          <Landmark size={15} className="text-white" />
+                          <span className="text-[12px] font-bold text-white uppercase tracking-widest font-[var(--font-mono)]">Bank Details</span>
+                        </div>
+                        <div className="bg-white px-4 py-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div className="flex flex-col gap-0.5">
+                            <span className="text-[10px] font-bold text-[var(--color-muted)] uppercase tracking-wider font-[var(--font-mono)]">Bank Name</span>
+                            <span className="text-[14px] font-extrabold text-[var(--color-ink)]">Karnataka Bank</span>
+                          </div>
+                          <div className="flex flex-col gap-0.5">
+                            <span className="text-[10px] font-bold text-[var(--color-muted)] uppercase tracking-wider font-[var(--font-mono)]">Account Number</span>
+                            <span className="text-[14px] font-extrabold text-[var(--color-ink)] select-all tracking-wide font-mono">0963202500002601</span>
+                          </div>
+                          <div className="flex flex-col gap-0.5">
+                            <span className="text-[10px] font-bold text-[var(--color-muted)] uppercase tracking-wider font-[var(--font-mono)]">Branch</span>
+                            <span className="text-[14px] font-extrabold text-[var(--color-ink)]">Electronic City</span>
+                          </div>
+                          <div className="flex flex-col gap-0.5">
+                            <span className="text-[10px] font-bold text-[var(--color-muted)] uppercase tracking-wider font-[var(--font-mono)]">IFSC Code</span>
+                            <span className="text-[14px] font-extrabold text-[var(--color-ink)] select-all tracking-wide font-mono">KARB0000963</span>
+                          </div>
+                        </div>
+                        <div className="bg-[var(--color-signal-tint)] border-t border-[var(--color-signal)]/10 px-4 py-2.5">
+                          <span className="text-[11px] text-[var(--color-signal)] font-semibold font-[var(--font-mono)]">
+                            Transfer exactly <strong>{(subtotal + gst + shipping).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</strong> and enter the UTR/reference below.
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Transaction Reference Input */}
+                      <div className="w-full flex flex-col gap-1.5 text-left">
+                        <label className="text-[12px] font-bold text-[var(--color-ink)]">
+                          Enter NEFT / RTGS Transaction Reference / UTR Number*
+                        </label>
+                        <input
+                          type="text"
+                          {...register('bankTransactionId')}
+                          placeholder="e.g. KARB1234567890 or UTR Number"
+                          className={`px-3.5 py-2 text-[14px] border rounded-lg focus:outline-none focus:border-[var(--color-signal)] ${errors.bankTransactionId ? 'border-[var(--color-error)]' : 'border-[var(--color-border)]'}`}
+                        />
+                        {errors.bankTransactionId && (
+                          <span className="text-[11.5px] text-[var(--color-error)] mt-0.5">
+                            {errors.bankTransactionId.message}
+                          </span>
+                        )}
+                        <span className="text-[11px] text-[var(--color-muted)] leading-normal mt-1">
+                          Complete the NEFT/RTGS transfer to the account above, then enter the transaction UTR/reference ID here and place your order. We will verify and dispatch once confirmed.
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </label>
 
                 {/* UPI QR Option */}
@@ -588,12 +641,8 @@ export default function CheckoutPage() {
                   <span className="w-5 h-5 rounded-full border-2 border-white border-t-transparent animate-spin" />
                 ) : selectedPaymentMethod === 'RAZORPAY' ? (
                   'Proceed to Pay →'
-                ) : selectedPaymentMethod === 'COD' ? (
-                  'Place Order →'
-                ) : selectedPaymentMethod === 'UPI_QR' ? (
-                  'Place Order →'
                 ) : (
-                  'Confirm Order →'
+                  'Place Order →'
                 )}
               </button>
               
