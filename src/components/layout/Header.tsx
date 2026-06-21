@@ -20,13 +20,13 @@ export function Header() {
       <div className="max-w-[var(--container)] mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
         
         {/* LOGO */}
-        <Link href="/" className="flex items-center group">
+        <Link href="/" className="flex items-center group overflow-visible">
           <Image
             src="/logo.png"
             alt="Fortune India Logo"
             width={400}
             height={120}
-            className="h-10 md:h-11 w-auto object-contain scale-[1.25] origin-left transition-transform group-hover:scale-[1.3]"
+            className="h-12 md:h-14 w-auto object-contain scale-[1.45] origin-left transition-transform group-hover:scale-[1.5]"
             priority
           />
         </Link>
