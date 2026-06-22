@@ -6,6 +6,7 @@ import { User } from '@/models'
 import type { IUser } from '@/models'
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
+  trustHost: true,
   secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: 'jwt' },
   providers: [
