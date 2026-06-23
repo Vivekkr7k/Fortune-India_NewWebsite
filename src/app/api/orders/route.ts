@@ -107,8 +107,7 @@ export async function POST(req: NextRequest) {
 
     const subtotal = round2(items.reduce((s, i) => s + i.price * i.quantity, 0))
     const shipping = round2(items.reduce((s, i) => s + (i.shippingCharge || 0) * i.quantity, 0))
-    const gst      = round2(subtotal * 0.18)
-    const total    = round2(subtotal + shipping + gst)
+    const total    = round2(subtotal + shipping)
 
     // Date.now() alone can collide on rapid submits; add a random suffix
     const orderNumber = `FI-${Date.now()}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`
@@ -138,7 +137,6 @@ export async function POST(req: NextRequest) {
       })),
       subtotal,
       shipping,
-      gst,
       total,
       paymentMethod,
       upiTransactionId:  paymentMethod === 'UPI_QR'        ? (body as any).upiTransactionId  : undefined,

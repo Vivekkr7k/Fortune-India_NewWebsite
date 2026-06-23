@@ -27,7 +27,7 @@ export interface IOrder extends Document {
   items: IOrderItem[]
   subtotal: number
   shipping: number
-  gst: number
+
   total: number
   paymentMethod: 'RAZORPAY' | 'COD' | 'BANK_TRANSFER' | 'UPI_QR'
   razorpayOrderId?: string
@@ -67,7 +67,7 @@ const OrderSchema = new Schema<IOrder>({
   items:             [OrderItemSchema],
   subtotal:          { type: Number, required: true },
   shipping:          { type: Number, default: 0 },
-  gst:               { type: Number, default: 0 },
+
   total:             { type: Number, required: true },
   paymentMethod:     { type: String, enum: ['RAZORPAY', 'COD', 'BANK_TRANSFER', 'UPI_QR'], default: 'COD' },
   razorpayOrderId:   { type: String },

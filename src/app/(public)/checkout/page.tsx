@@ -125,10 +125,9 @@ export default function CheckoutPage() {
   }
 
   const subtotal = total()
-  const gst = subtotal * 0.18
   // Shipping comes from each product's own shippingCharge
   const shipping = items.reduce((s, i) => s + (i.shippingCharge || 0) * i.quantity, 0)
-  const grandTotal = subtotal + gst + shipping
+  const grandTotal = subtotal + shipping
 
   async function onSubmit(data: CheckoutFormData) {
     // Guard against submitting before the cart store has hydrated
@@ -538,7 +537,7 @@ export default function CheckoutPage() {
                         </div>
                         <div className="bg-[var(--color-signal-tint)] border-t border-[var(--color-signal)]/10 px-4 py-2.5">
                           <span className="text-[11px] text-[var(--color-signal)] font-semibold font-[var(--font-mono)]">
-                            Transfer exactly <strong>{(subtotal + gst + shipping).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</strong> and enter the UTR/reference below.
+                            Transfer exactly <strong>{(subtotal + shipping).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</strong> and enter the UTR/reference below.
                           </span>
                         </div>
                       </div>
@@ -718,10 +717,7 @@ export default function CheckoutPage() {
                     {shipping === 0 ? 'Free' : formatPrice(shipping)}
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span>GST (18%)</span>
-                  <span className="font-semibold text-[var(--color-ink)]">{formatPrice(gst)}</span>
-                </div>
+
                 
                 <div className="flex justify-between items-center pt-3 border-t border-[var(--color-border-light)] text-[15px] font-bold text-[var(--color-ink)]">
                   <span>Total Due</span>

@@ -41,7 +41,7 @@ interface OrderData {
   items: OrderItem[]
   subtotal: number
   shipping: number
-  gst: number
+
   total: number
   paymentMethod: 'RAZORPAY' | 'BANK_TRANSFER' | 'UPI_QR'
   razorpayOrderId?: string
@@ -409,10 +409,7 @@ export function OrdersPageClient({ initialOrders }: { initialOrders: OrderData[]
                           <span>Shipping:</span>
                           <span className="font-semibold text-[var(--color-ink)]">{formatPrice(order.shipping)}</span>
                         </div>
-                        <div className="flex justify-between">
-                          <span>GST (18%):</span>
-                          <span className="font-semibold text-[var(--color-ink)]">{formatPrice(order.gst)}</span>
-                        </div>
+
                         <div className="flex justify-between border-t border-[var(--color-border)] pt-2 mt-1 text-[14px] font-bold text-[var(--color-signal)]">
                           <span>Grand Total:</span>
                           <span className="font-extrabold text-[var(--color-ink)]">{formatPrice(order.total)}</span>

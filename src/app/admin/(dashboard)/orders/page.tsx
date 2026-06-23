@@ -64,7 +64,6 @@ export default async function AdminOrdersPage() {
       items: order.items || [],
       subtotal: order.subtotal || 0,
       shipping: order.shipping || 0,
-      gst: order.gst || 0,
       total: order.total || 0,
       paymentMethod: order.paymentMethod || 'COD',
       paymentStatus: order.paymentStatus || 'PENDING',

@@ -26,9 +26,8 @@ export default function CartPage() {
   }
 
   const subtotal = total()
-  const gst = subtotal * 0.18
   const shipping = items.reduce((s, i) => s + (i.shippingCharge || 0) * i.quantity, 0)
-  const grandTotal = subtotal + gst + shipping
+  const grandTotal = subtotal + shipping
 
   function handlePromoApply(e: React.FormEvent) {
     e.preventDefault()
@@ -155,10 +154,7 @@ export default function CartPage() {
                       {shipping === 0 ? <span className="text-[var(--color-success)] uppercase font-bold text-[12px] tracking-wide bg-[var(--color-success-tint)] px-2.5 py-0.5 rounded-full">Free</span> : formatPrice(shipping)}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center text-[var(--color-muted)]">
-                    <span>GST (18%)</span>
-                    <span className="font-semibold text-[var(--color-ink)]">{formatPrice(gst)}</span>
-                  </div>
+
                   {promoApplied && (
                     <div className="flex justify-between items-center text-[var(--color-success)] font-medium">
                       <span>Discount (FI10)</span>

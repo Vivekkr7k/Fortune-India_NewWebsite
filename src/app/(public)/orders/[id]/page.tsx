@@ -161,10 +161,6 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
                 {order.shipping === 0 ? 'Free' : formatPrice(order.shipping)}
               </span>
             </div>
-            <div className="flex justify-between">
-              <span>GST (18%)</span>
-              <span className="font-semibold text-[var(--color-ink)]">{formatPrice(order.gst ?? order.subtotal * 0.18)}</span>
-            </div>
             <div className="flex justify-between pt-2.5 border-t border-[var(--color-border-light)] text-[16px] font-bold text-[var(--color-ink)]">
               <span>Total Paid</span>
               <span className="font-[var(--font-display)] text-[20px] font-extrabold text-[var(--color-ink)]">

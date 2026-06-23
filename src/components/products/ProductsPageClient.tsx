@@ -116,7 +116,14 @@ export function ProductsPageClient({
 
   // Debounce: run the filter only after 300ms of no typing
   useEffect(() => {
-    const t = setTimeout(() => setSearch(searchInput), 300)
+    const t = setTimeout(() => {
+      setSearch(searchInput)
+      // Automatically clear category filters for global search when user types
+      if (searchInput.trim() !== '') {
+        setActiveCategory('all')
+        setActiveSubcategory('all')
+      }
+    }, 300)
     return () => clearTimeout(t)
   }, [searchInput])
 
@@ -140,7 +147,17 @@ export function ProductsPageClient({
   const filtered = products
     .filter((p) => activeCategory === 'all' || p.category.slug === activeCategory)
     .filter((p) => activeSubcategory === 'all' || (p.subcategory && p.subcategory.slug === activeSubcategory))
-    .filter((p) => search === '' || p.name.toLowerCase().includes(search.toLowerCase()))
+    .filter((p) => {
+      if (search.trim() === '') return true
+      const s = search.toLowerCase()
+      return (
+        p.name.toLowerCase().includes(s) ||
+        (p.brand && p.brand.toLowerCase().includes(s)) ||
+        (p.code && p.code.toLowerCase().includes(s)) ||
+        (p.category && p.category.name.toLowerCase().includes(s)) ||
+        (p.subcategory && p.subcategory.name.toLowerCase().includes(s))
+      )
+    })
     .sort((a, b) => {
       if (sortBy === 'price-asc') return a.price - b.price
       if (sortBy === 'price-desc') return b.price - a.price
