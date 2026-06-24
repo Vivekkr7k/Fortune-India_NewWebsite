@@ -18,8 +18,8 @@ const round2 = (n: number) => Math.round(n * 100) / 100
 
 // Treats unset keys and the committed dummy placeholders as "not configured"
 function getRazorpayKeys() {
-  const key_id = process.env.RAZORPAY_KEY_ID
-  const key_secret = process.env.RAZORPAY_KEY_SECRET
+  const key_id = process.env.RAZORPAY_KEY_ID?.trim()
+  const key_secret = process.env.RAZORPAY_KEY_SECRET?.trim()
   const configured =
     !!key_id && !!key_secret &&
     !key_id.includes('dummy') && !key_secret.includes('dummy')

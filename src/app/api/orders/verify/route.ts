@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing payment verification details' }, { status: 400 })
     }
 
-    const keySecret = process.env.RAZORPAY_KEY_SECRET
+    const keySecret = process.env.RAZORPAY_KEY_SECRET?.trim()
     if (!keySecret || keySecret.includes('dummy')) {
       return NextResponse.json({ error: 'Payment verification is not configured (missing RAZORPAY_KEY_SECRET).' }, { status: 503 })
     }
