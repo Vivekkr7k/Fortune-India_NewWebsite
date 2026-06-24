@@ -7,7 +7,7 @@ import type { IUser } from '@/models'
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   trustHost: true,
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
   session: { strategy: 'jwt' },
   providers: [
     Credentials({
@@ -16,25 +16,30 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        await connectDB()
+        try {
+          await connectDB()
 
-        const user = await User.findOne({
-          email: credentials?.email?.toString().toLowerCase(),
-        }).lean<IUser>()
+          const user = await User.findOne({
+            email: credentials?.email?.toString().toLowerCase(),
+          }).lean<IUser>()
 
-        if (!user) return null
+          if (!user) return null
 
-        const valid = await bcrypt.compare(
-          credentials?.password?.toString() ?? '',
-          user.password
-        )
-        if (!valid) return null
+          const valid = await bcrypt.compare(
+            credentials?.password?.toString() ?? '',
+            user.password
+          )
+          if (!valid) return null
 
-        return {
-          id: user._id.toString(),
-          email: user.email,
-          name: user.name,
-          role: user.role,
+          return {
+            id: user._id.toString(),
+            email: user.email,
+            name: user.name,
+            role: user.role,
+          }
+        } catch (error) {
+          console.error("NextAuth Authorize Error:", error);
+          throw error;
         }
       },
     }),
